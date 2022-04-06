@@ -35,15 +35,14 @@ const initialValues = {
   country: ''
 };
 
-const steps = [
-  <PersonalInfo formField={formModel.formField} />,
-  <ContactInfo formField={formModel.formField} />
-];
+const steps = [PersonalInfo, ContactInfo];
 
 const MainPage = () => {
   const classes = useStyle();
   const [activeStep, setActiveStep] = useState(0);
   const isLastStep = activeStep === steps.length - 1;
+
+  const ComponentToRender = steps[activeStep];
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -77,7 +76,7 @@ const MainPage = () => {
       <Formik initialValues={initialValues} onSubmit={handleSubmit}>
         {({ isSubmitting }) => (
           <Form id={formModel.formId}>
-            {steps[activeStep]}
+            <ComponentToRender formField={formModel.formField} />
 
             <Grid container spacing={3}>
               <Grid item xs={12}>
