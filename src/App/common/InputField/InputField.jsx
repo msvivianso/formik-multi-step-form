@@ -2,14 +2,14 @@ import React from 'react';
 import { useField } from 'formik';
 import { TextField } from '@material-ui/core';
 
-const InputField = (props) => {
-  const { errorText, ...rest } = props;
-  const [field, meta] = useField(props);
+const InputField = ({ name, label, ...rest }) => {
+  const [field, meta] = useField(name);
 
   return (
     <TextField
       type="text"
       error={meta.touched && meta.error && true}
+      label={label}
       {...field}
       {...rest}
     />
