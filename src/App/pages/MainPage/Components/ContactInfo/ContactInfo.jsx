@@ -20,7 +20,7 @@ const ContactInfo = ({ onNext, onBack }) => {
 
   return (
     <Formik initialValues={initialValues} onSubmit={onSubmit}>
-      <Form id={'PersonalInfo'}>
+      <Form id={'ContactInfo'}>
         <Typography variant="h6" gutterBottom>
           Contact Info
         </Typography>
