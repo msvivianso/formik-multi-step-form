@@ -8,7 +8,7 @@ const InputField = ({ name, label, ...rest }) => {
   return (
     <TextField
       type="text"
-      error={meta.touched && meta.error && true}
+      error={meta.touched && meta.error}
       label={label}
       {...field}
       {...rest}
