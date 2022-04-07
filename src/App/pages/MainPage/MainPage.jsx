@@ -1,19 +1,21 @@
 import React, { useState } from 'react';
-// import { Formik, Form } from 'formik';
-// import { Button, CircularProgress, Grid } from '@material-ui/core';
 
 import { FormContextProvider } from 'App/pages/MainPage/FormContext';
 import PersonalInfo from 'App/pages/MainPage/Components/PersonalInfo';
 import ContactInfo from 'App/pages/MainPage/Components/ContactInfo';
 import Confirmation from './Components/Confirmation';
+import StepTracker from 'App/common/StepTracker';
 
-const steps = [PersonalInfo, ContactInfo];
+const steps = [
+  { label: 'Personal Info', component: PersonalInfo },
+  { label: 'Contact Info', component: ContactInfo }
+];
 
 const MainPage = () => {
   const [activeStep, setActiveStep] = useState(0);
   const isLastStep = activeStep === steps.length;
 
-  const ComponentToRender = steps[activeStep];
+  const ComponentToRender = steps[activeStep]?.component;
 
   const onBack = () => {
     setActiveStep(activeStep - 1);
@@ -30,7 +32,10 @@ const MainPage = () => {
         {isLastStep ? (
           <Confirmation />
         ) : (
-          <ComponentToRender onNext={onNext} onBack={onBack} />
+          <>
+            <StepTracker activeStep={activeStep} steps={steps} />
+            <ComponentToRender onNext={onNext} onBack={onBack} />
+          </>
         )}
       </FormContextProvider>
     </React.Fragment>
